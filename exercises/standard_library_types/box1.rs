@@ -5,8 +5,7 @@
 // To get around the issue, we can use a `Box` - a smart pointer used to store data on the heap,
 // which also allows us to wrap a recursive type.
 //
-// The recursive type we're implementing in this exercise is the `cons list` - a data structure
-// frequently found in functional programming languages. Each item in a cons list contains two
+// The recursive type we're implementing in this exercise is the `cons list` - a data structure // frequently found in functional programming languages. Each item in a cons list contains two
 // elements: the value of the current item and the next item. The last item is a value called `Nil`.
 //
 // Step 1: use a `Box` in the enum definition to make the code compile
@@ -16,11 +15,9 @@
 //
 // Execute `rustlings hint box1` for hints :)
 
-// I AM NOT DONE
-
 #[derive(PartialEq, Debug)]
 pub enum List {
-    Cons(i32, List),
+    Cons(i32, Box<List>),
     Nil,
 }
 
@@ -33,11 +30,12 @@ fn main() {
 }
 
 pub fn create_empty_list() -> List {
-    unimplemented!()
+    List::Nil
 }
 
 pub fn create_non_empty_list() -> List {
-    unimplemented!()
+    use List::*;
+    Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))))
 }
 
 #[cfg(test)]
