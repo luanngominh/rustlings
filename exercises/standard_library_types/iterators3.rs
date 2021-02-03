@@ -1,13 +1,8 @@
 // iterators3.rs
 // This is a bigger exercise than most of the others! You can do it!
 // Here is your mission, should you choose to accept it:
-// 1. Complete the divide function to get the first four tests to pass
-// 2. Uncomment the last two tests and get them to pass by filling in
-//    values for `x` using `division_results`.
-// Execute `rustlings hint iterators3` to get some hints!
+// 1. Complete the divide function to get the first four tests to pass // 2. Uncomment the last two tests and get them to pass by filling in //    values for `x` using `division_results`. // Execute `rustlings hint iterators3` to get some hints!
 // Have fun :-)
-
-// I AM NOT DONE
 
 #[derive(Debug, PartialEq, Eq)]
 pub enum DivisionError {
@@ -75,15 +70,15 @@ mod tests {
     fn result_with_list() {
         let numbers = vec![27, 297, 38502, 81];
         let division_results = numbers.into_iter().map(|n| divide(n, 27));
-        let x = division_results.collect::<String>();
+        let x: Result<Vec<i32>, DivisionError> = division_results.collect();
         assert_eq!(format!("{:?}", x), "Ok([1, 11, 1426, 3])");
     }
 
-    // #[test]
-    // fn list_of_results() {
-    //     let numbers = vec![27, 297, 38502, 81];
-    //     let division_results = numbers.into_iter().map(|n| divide(n, 27));
-    //     let x //... Fill in here!
-    //     assert_eq!(format!("{:?}", x), "[Ok(1), Ok(11), Ok(1426), Ok(3)]");
-    // }
+    #[test]
+    fn list_of_results() {
+        let numbers = vec![27, 297, 38502, 81];
+        let division_results = numbers.into_iter().map(|n| divide(n, 27));
+        let x: Vec<Result<i32, DivisionError>> = division_results.collect();
+        assert_eq!(format!("{:?}", x), "[Ok(1), Ok(11), Ok(1426), Ok(3)]");
+    }
 }
